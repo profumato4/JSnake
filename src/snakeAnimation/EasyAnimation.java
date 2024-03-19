@@ -4,15 +4,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
-import snake.CampoPanel;
 import snake.SnakeBodyLabel;
 
-import javax.swing.JLabel;
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class EasyAnimation extends JPanel {
+public class EasyAnimation extends JPanel implements Animation{
 
 	private static final long serialVersionUID = 1L;
 	private SnakeBodyLabel sn;
@@ -24,13 +21,10 @@ public class EasyAnimation extends JPanel {
 	 * Create the panel.
 	 */
 	public EasyAnimation() {
-		setBackground(new Color(46, 139, 87));
-		setSize(222, 226);
-		setLayout(null);
-
-		
+		setPanel(this);
 	}
 	
+	@Override
 	public void startAnimation() {
 		sn = new SnakeBodyLabel();
 		sn.setBounds(10, 196, 30, 30);
@@ -140,6 +134,7 @@ public class EasyAnimation extends JPanel {
 		}).start();
 	}
 	
+	@Override
 	public void stopAnimation() {
 		SwingUtilities.invokeLater(() -> {
 			t.stop();
