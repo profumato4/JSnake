@@ -1,5 +1,10 @@
 package snakeAnimation;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
@@ -8,6 +13,9 @@ import snake.SnakeBodyLabel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.File;
+
 
 public class EasyAnimation extends JPanel implements Animation{
 
@@ -31,7 +39,7 @@ public class EasyAnimation extends JPanel implements Animation{
 		add(sn);
 
 		new Thread(() -> {
-			
+			audio();
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
@@ -143,5 +151,7 @@ public class EasyAnimation extends JPanel implements Animation{
 			repaint();
 		});	
 	}
+	
+
 	
 }	
