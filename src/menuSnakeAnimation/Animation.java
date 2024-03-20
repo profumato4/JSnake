@@ -25,9 +25,9 @@ public interface Animation{
 	
 	void stopAnimation();
 	
-	default void audio() {
+	default void audio(String path) {
 		try {
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("res/sounds/menuSound.wav"));
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(path));
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioIn);
 			clip.start();

@@ -17,6 +17,7 @@ import labels.FoodLabel;
 import menuSnakeAnimation.EasyAnimation;
 import menuSnakeAnimation.HardAnimation;
 import menuSnakeAnimation.MidAnimation;
+import menuSnakeAnimation.StartGameAnimation;
 
 public class MenuPanel extends JPanel {
 
@@ -27,6 +28,7 @@ public class MenuPanel extends JPanel {
 	private EasyAnimation easyAnimation;
 	private MidAnimation midAnimation;
 	private HardAnimation hardAnimation;
+	private StartGameAnimation sga;
 
 	/**
 	 * Create the panel.
@@ -80,6 +82,13 @@ public class MenuPanel extends JPanel {
 	
 	private void setupButtons() {
 		JButton easyButton = new JButton("Easy");
+		easyButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sga.startAnimation();
+				campoPanel.setVisible(false);
+				sga.setVisible(true);
+			}
+		});
 		easyButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -100,6 +109,13 @@ public class MenuPanel extends JPanel {
 		campoPanel.add(easyButton);
 		
 		JButton midButton = new JButton("Mid");
+		midButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sga.startAnimation();
+				campoPanel.setVisible(false);
+				sga.setVisible(true);
+			}
+		});
 		midButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -120,6 +136,13 @@ public class MenuPanel extends JPanel {
 		campoPanel.add(midButton);
 		
 		JButton hardButton = new JButton("Hard");
+		hardButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				sga.startAnimation();
+				campoPanel.setVisible(false);
+				sga.setVisible(true);
+			}
+		});
 		hardButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent e) {
@@ -157,6 +180,12 @@ public class MenuPanel extends JPanel {
 		hardAnimation.setBounds(542, 340, 222, 226);
 		hardAnimation.setVisible(false);
 		campoPanel.add(hardAnimation);
+		
+		sga = new StartGameAnimation();
+		sga.setVisible(false);
+		add(sga, BorderLayout.CENTER);
+		
+		
 	}
 	
 }

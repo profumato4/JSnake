@@ -32,7 +32,7 @@ public class EasyAnimation extends JPanel implements Animation{
 		add(sn);
 
 		new Thread(() -> {
-			audio();
+			audio("res/sounds/menuSound.wav");
 			try {
 				Thread.sleep(100);
 			} catch (InterruptedException e) {
