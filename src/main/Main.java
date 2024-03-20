@@ -1,10 +1,13 @@
-package snake;
+package main;
 
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
+
+import panels.CampoPanel;
+import panels.MenuPanel;
 
 import java.awt.Color;
 import java.awt.BorderLayout;

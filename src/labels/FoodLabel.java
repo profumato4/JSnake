@@ -1,4 +1,4 @@
-package snake;
+package labels;
 
 import java.awt.Dimension;
 import java.awt.Graphics;

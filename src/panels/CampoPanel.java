@@ -1,4 +1,4 @@
-package snake;
+package panels;
 
 import javax.swing.JPanel;
 

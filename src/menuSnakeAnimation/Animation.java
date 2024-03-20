@@ -1,4 +1,4 @@
-package snakeAnimation;
+package menuSnakeAnimation;
 
 import java.awt.Color;
 import java.io.File;
@@ -27,7 +27,7 @@ public interface Animation{
 	
 	default void audio() {
 		try {
-			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("res/menuSound.wav"));
+			AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File("res/sounds/menuSound.wav"));
 			Clip clip = AudioSystem.getClip();
 			clip.open(audioIn);
 			clip.start();
