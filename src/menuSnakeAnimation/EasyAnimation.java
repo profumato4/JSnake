@@ -144,6 +144,12 @@ public class EasyAnimation extends JPanel implements Animation{
 			repaint();
 		});	
 	}
+
+	@Override
+	public void startAnimation(String level) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 
 	

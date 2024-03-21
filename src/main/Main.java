@@ -48,7 +48,7 @@ public class Main {
 		frame = new JFrame();
 		
 		
-		frame.setBounds(600, 100, 907, 800);
+		frame.setBounds(600, 100, 920, 850);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));

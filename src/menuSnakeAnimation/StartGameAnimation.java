@@ -1,12 +1,13 @@
 package menuSnakeAnimation;
 
-import java.awt.Color;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import java.awt.BorderLayout;
 import panels.CampoPanel;
+import panels.Gaming;
+
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,18 +17,20 @@ public class StartGameAnimation extends JPanel implements Animation{
 
 	private static final long serialVersionUID = 1L;
 	private Timer t;
+	private Gaming game;
+	private String level;
+	
 	/**
 	 * Create the panel.
 	 */
 	public StartGameAnimation() {
 		setSize(892,764);
 		setLayout(null);
-		
 
 	}
 
-	@Override
-	public void startAnimation() {
+	
+	public void startAnimation(String level) {
 		CampoPanel campoPanel = new CampoPanel();
 		add(campoPanel, BorderLayout.CENTER);
 		
@@ -61,6 +64,11 @@ public class StartGameAnimation extends JPanel implements Animation{
 						text.setText("GO");
 						break;
 					
+					case "GO":
+						campoPanel.setVisible(false);
+						startGame(level);
+						((Timer) e.getSource()).stop();
+						break;
 				}
 				
 			}
@@ -75,6 +83,16 @@ public class StartGameAnimation extends JPanel implements Animation{
 		
 	}
 	
-	
+	private void startGame(String level) {
+		game = new Gaming(level);
+		add(game, BorderLayout.CENTER);
+	}
+
+
+	@Override
+	public void startAnimation() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

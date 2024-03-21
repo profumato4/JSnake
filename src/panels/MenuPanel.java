@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 import labels.FoodLabel;
+import main.SnakeFont;
 import menuSnakeAnimation.EasyAnimation;
 import menuSnakeAnimation.HardAnimation;
 import menuSnakeAnimation.MidAnimation;
@@ -24,6 +25,7 @@ public class MenuPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private JLabel text;
 	private CampoPanel campoPanel;
+	private SnakeFont snakeFont;
 	private Font font;
 	private EasyAnimation easyAnimation;
 	private MidAnimation midAnimation;
@@ -34,8 +36,9 @@ public class MenuPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MenuPanel() {
-		font = setFont();
-		setSize(892, 764);
+		snakeFont = new SnakeFont(90);
+		font = snakeFont.getFont();
+		setSize(920, 850);
 		setLayout(new BorderLayout(0, 0));
 		
 		campoPanel = new CampoPanel();
@@ -66,25 +69,12 @@ public class MenuPanel extends JPanel {
 		
 	}
 	
-	private Font setFont() {
-		File file = new File("res/font/SnakeGameDemoRegular.ttf");
-		Font font = null;
-		try {
-			System.out.println(file);
-			font = Font.createFont(Font.TRUETYPE_FONT, file).deriveFont(Font.PLAIN, 90);
-	    } catch (Exception e) {
-	        System.err.println("Impossibile caricare il font");
-	        font = new Font("Arial", Font.PLAIN, 30);
-	    }
-		
-		return font;
-	}
 	
 	private void setupButtons() {
 		JButton easyButton = new JButton("Easy");
 		easyButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sga.startAnimation();
+				sga.startAnimation("Easy");
 				campoPanel.setVisible(false);
 				sga.setVisible(true);
 			}
@@ -111,7 +101,7 @@ public class MenuPanel extends JPanel {
 		JButton midButton = new JButton("Mid");
 		midButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sga.startAnimation();
+				sga.startAnimation("Mid");
 				campoPanel.setVisible(false);
 				sga.setVisible(true);
 			}
@@ -132,13 +122,13 @@ public class MenuPanel extends JPanel {
 		midButton.setFocusPainted(false);
 		midButton.setContentAreaFilled(false);
 		midButton.setBorderPainted(false);
-		midButton.setBounds(292, 566, 183, 78);
+		midButton.setBounds(292, 566, 230, 78);
 		campoPanel.add(midButton);
 		
 		JButton hardButton = new JButton("Hard");
 		hardButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				sga.startAnimation();
+				sga.startAnimation("Hard");
 				campoPanel.setVisible(false);
 				sga.setVisible(true);
 			}
@@ -159,7 +149,7 @@ public class MenuPanel extends JPanel {
 		hardButton.setFocusPainted(false);
 		hardButton.setContentAreaFilled(false);
 		hardButton.setBorderPainted(false);
-		hardButton.setBounds(542, 566, 222, 78);
+		hardButton.setBounds(534, 566, 230, 78);
 		campoPanel.add(hardButton);
 		
 		

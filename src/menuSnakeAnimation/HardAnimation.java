@@ -146,4 +146,10 @@ public class HardAnimation extends JPanel implements Animation{
 		});	
 	}
 
+	@Override
+	public void startAnimation(String level) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
