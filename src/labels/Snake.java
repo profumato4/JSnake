@@ -24,9 +24,9 @@ public class Snake extends JLabel{
 
 		int size = 20;
 
-		g2d.fillRect(10, 10, size, size);
-		g2d.fillRect(10, 33, size, size);
-		g2d.fillRect(10, 56, size, size);
+		g2d.fillRect(0, 10, size, size);
+		g2d.fillRect(0, 33, size, size);
+		g2d.fillRect(0, 56, size, size);
 
 
 		g2d.dispose();

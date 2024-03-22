@@ -1,5 +1,6 @@
 package labels;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -12,9 +13,15 @@ public class SnakeBodyLabel extends JLabel  {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Color bodyColor = Color.BLACK;
+	private int size = 20;
 	
 	public SnakeBodyLabel() {
 		setPreferredSize(new Dimension(40, 40));
+	}
+	
+	public SnakeBodyLabel(int size) {
+		this.size = size;
 	}
 	
 	@Override
@@ -22,12 +29,18 @@ public class SnakeBodyLabel extends JLabel  {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g.create();
 
-		int size = 20;
-
+		
+		
+		g2d.setColor(bodyColor);
 		g2d.fillRect(10, 10, size, size);
 
 
 		g2d.dispose();
+	}
+	
+	public void setColor(Color color) {
+		bodyColor = color;
+		repaint();
 	}
 	
 }

@@ -22,6 +22,7 @@ public interface Animation{
 	}
 	
 	void startAnimation();
+	
 	void startAnimation(String level);
 	
 	void stopAnimation();

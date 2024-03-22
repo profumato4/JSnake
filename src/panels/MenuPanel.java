@@ -15,10 +15,12 @@ import javax.swing.SwingConstants;
 
 import labels.FoodLabel;
 import main.SnakeFont;
+import menuSnakeAnimation.ColorAnimation;
 import menuSnakeAnimation.EasyAnimation;
 import menuSnakeAnimation.HardAnimation;
 import menuSnakeAnimation.MidAnimation;
 import menuSnakeAnimation.StartGameAnimation;
+import labels.SnakeBodyLabel;
 
 public class MenuPanel extends JPanel {
 
@@ -31,6 +33,7 @@ public class MenuPanel extends JPanel {
 	private MidAnimation midAnimation;
 	private HardAnimation hardAnimation;
 	private StartGameAnimation sga;
+	private ColorAnimation ca;
 
 	/**
 	 * Create the panel.
@@ -77,6 +80,7 @@ public class MenuPanel extends JPanel {
 				sga.startAnimation("Easy");
 				campoPanel.setVisible(false);
 				sga.setVisible(true);
+				ca.stopAnimation();
 			}
 		});
 		easyButton.addMouseListener(new MouseAdapter() {
@@ -104,6 +108,7 @@ public class MenuPanel extends JPanel {
 				sga.startAnimation("Mid");
 				campoPanel.setVisible(false);
 				sga.setVisible(true);
+				ca.stopAnimation();
 			}
 		});
 		midButton.addMouseListener(new MouseAdapter() {
@@ -131,6 +136,7 @@ public class MenuPanel extends JPanel {
 				sga.startAnimation("Hard");
 				campoPanel.setVisible(false);
 				sga.setVisible(true);
+				ca.stopAnimation();
 			}
 		});
 		hardButton.addMouseListener(new MouseAdapter() {
@@ -175,7 +181,10 @@ public class MenuPanel extends JPanel {
 		sga.setVisible(false);
 		add(sga, BorderLayout.CENTER);
 		
+		ca = new ColorAnimation();
+		ca.setBounds(831, 692, 40, 40);
+		ca.startAnimation();
+		campoPanel.add(ca);
 		
 	}
-	
 }

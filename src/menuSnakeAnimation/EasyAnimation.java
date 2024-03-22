@@ -112,7 +112,7 @@ public class EasyAnimation extends JPanel implements Animation{
 
 					if (x2 == 120) {
 						y2 = Math.min(y2 + 13, 231);
-						;
+						
 						sn1.setBounds(x2, y2, size, size);
 					}
 
