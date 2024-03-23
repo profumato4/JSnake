@@ -1,6 +1,7 @@
 package panels;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
 import java.util.Random;
@@ -10,22 +11,27 @@ import javax.swing.Timer;
 
 import labels.SnakeBodyLabel;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JLabel;
 
 import labels.FoodLabel;
-import labels.Snake;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.IOException;
 
 public class Gaming extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private CampoPanel campoPanel;
+	private GameOver go;
 	private int score;
 	private String level;
 	private Snake snake;
@@ -36,7 +42,6 @@ public class Gaming extends JPanel {
 	private int x = 20 + new Random().nextInt(816 - 20 + 1);
 	private int y1 = 12 + new Random().nextInt(718 - 12 + 1);
 	private int x1 = 21 + new Random().nextInt(842 - 22 + 1);
-	private String[] direzioni = {"sopra", "sotto", "destra", "sinistra"};
 	private int selezione = new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
 	
 	/**
@@ -49,8 +54,11 @@ public class Gaming extends JPanel {
 		this.level = level;
 		
 		campoPanel = new CampoPanel();
-		campoPanel.setFocusable(true);
+		campoPanel.setFocusable(true);	
+		campoPanel.setRequestFocusEnabled(true);	
+		System.out.println(campoPanel.requestFocusInWindow());
 		campoPanel.requestFocusInWindow();
+		campoPanel.requestFocus();
 		campoPanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -59,12 +67,13 @@ public class Gaming extends JPanel {
 				System.out.println(keyCode);
 				if(keyCode == KeyEvent.VK_RIGHT) {
 					x += 10;
-					snake.setBounds(x, y, 40, 82);
+					snake.move(x, y);
 				}
 				
 			}
 		});
 		add(campoPanel, BorderLayout.CENTER);
+		
 		campoPanel.setLayout(null);
 		
 		scoreLabel = new JLabel("Score: " + score);
@@ -157,17 +166,27 @@ public class Gaming extends JPanel {
 					}else {
 						x -= 10;
 				}
-					
+		*/			
 					if(x + 10 > 816) {
 						x = 816;
 					}else {
 						x += 10;
 					}
-			*/		
-				//	snake.setBounds(x, y, 74, 20);
-					System.out.println(selezione);
+					
+					snake.setBounds(x, y, 74, 20);
+					//System.out.println(selezione);
+					
+					
 					
 					if(y == 683 || y == 11 || x == 816 || x == 20) {
+						go = new GameOver();
+						campoPanel.add(go, BorderLayout.CENTER);
+						campoPanel.remove(food);
+						snake.setOpaque(false);
+						snake.setColor(new Color(200, 200, 200, 100));
+						audio("res/sounds/loseSound.wav");
+						repaint();
+						revalidate();
 						((Timer) e.getSource()).stop();
 					}
 					
@@ -193,7 +212,21 @@ public class Gaming extends JPanel {
 				}
 				
 			}).start();
+		}).start();;
+	}
+	
+	private void audio(String path) {
+		new Thread(() -> {
+			try {
+				AudioInputStream audioIn = AudioSystem.getAudioInputStream(new File(path));
+				Clip clip = AudioSystem.getClip();
+				clip.open(audioIn);
+				clip.start();
+			} catch (LineUnavailableException | UnsupportedAudioFileException | IOException e1) {
+				e1.printStackTrace();
+			}
 		}).start();
+
 	}
 	
 }

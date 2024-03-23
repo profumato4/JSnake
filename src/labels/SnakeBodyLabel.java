@@ -32,7 +32,7 @@ public class SnakeBodyLabel extends JLabel  {
 		
 		
 		g2d.setColor(bodyColor);
-		g2d.fillRect(10, 10, size, size);
+		g2d.fillRect(0, 0, size, size);
 
 
 		g2d.dispose();
