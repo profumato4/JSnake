@@ -53,26 +53,44 @@ public class Gaming extends JPanel {
 		
 		this.level = level;
 		
+		
+		
 		campoPanel = new CampoPanel();
 		campoPanel.setFocusable(true);	
-		campoPanel.setRequestFocusEnabled(true);	
-		System.out.println(campoPanel.requestFocusInWindow());
 		campoPanel.requestFocusInWindow();
-		campoPanel.requestFocus();
+		System.out.println(campoPanel.requestFocusInWindow() + " " + campoPanel.isFocusable());
 		campoPanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				
 				int keyCode = e.getKeyCode();
 				System.out.println(keyCode);
-				if(keyCode == KeyEvent.VK_RIGHT) {
-					x += 10;
-					snake.move(x, y);
-				}
+				 switch (keyCode) {
+		            case KeyEvent.VK_UP:
+		                y -= 10;
+		                
+		                break;
+		                
+		            case KeyEvent.VK_DOWN:
+		                y += 10;
+		                
+		                break;
+		                
+		            case KeyEvent.VK_RIGHT:
+		                x += 10;
+		                
+		                break;
+		                
+		            case KeyEvent.VK_LEFT:
+		                x -= 10;
+		                
+		                break;
+		        }
 				
 			}
 		});
 		add(campoPanel, BorderLayout.CENTER);
+
 		
 		campoPanel.setLayout(null);
 		
@@ -113,6 +131,8 @@ public class Gaming extends JPanel {
 		
 		run();
 		spawnFood();
+		
+	
 		
 	}
 	
@@ -166,7 +186,7 @@ public class Gaming extends JPanel {
 					}else {
 						x -= 10;
 				}
-		*/			
+					
 					if(x + 10 > 816) {
 						x = 816;
 					}else {
@@ -175,7 +195,7 @@ public class Gaming extends JPanel {
 					
 					snake.setBounds(x, y, 74, 20);
 					//System.out.println(selezione);
-					
+		*/			
 					
 					
 					if(y == 683 || y == 11 || x == 816 || x == 20) {
@@ -183,7 +203,7 @@ public class Gaming extends JPanel {
 						campoPanel.add(go, BorderLayout.CENTER);
 						campoPanel.remove(food);
 						snake.setOpaque(false);
-						snake.setColor(new Color(200, 200, 200, 100));
+						snake.setColor(new Color(0,0,0,96));
 						audio("res/sounds/loseSound.wav");
 						repaint();
 						revalidate();
@@ -214,6 +234,7 @@ public class Gaming extends JPanel {
 			}).start();
 		}).start();;
 	}
+	
 	
 	private void audio(String path) {
 		new Thread(() -> {

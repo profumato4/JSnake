@@ -49,18 +49,8 @@ public class Snake extends JPanel {
 		setPreferredSize(new Dimension(length * (size + 5), size)); 
 	}
 	
-	public void move(int dx, int dy) {
-        // Spostiamo tutti i pezzi del corpo dxello snake in avanti, partendo dalla coda
-        for (int i = length - 1; i > 0; i--) {
-            SnakeBodyLabel currentPart = bodyParts.get(i);
-            SnakeBodyLabel prevPart = bodyParts.get(i - 1);
-            currentPart.setBounds(prevPart.getBounds());
-        }
 
-        // Spostiamo la testa dello snake
-        SnakeBodyLabel head = bodyParts.get(0);
-        head.setLocation(head.getX() + dx, head.getY() + dy);
-    }
+	
 
 	public void setColor(Color color) {
         bodyColor = color;
