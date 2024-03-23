@@ -32,12 +32,13 @@ public class Gaming extends JPanel {
 	private Rectangle[] rec = new Rectangle[4];
 	private FoodLabel food;
 	private JLabel scoreLabel;
-	private int y = 12 + new Random().nextInt(747 - 12 + 1);
-	private int x = 21 + new Random().nextInt(879 - 21 + 1);
-	private int y1 = 12 + new Random().nextInt(747 - 12 + 1);
-	private int x1 = 21 + new Random().nextInt(879 - 21 + 1);
+	private int y = 11 + new Random().nextInt(683 - 11 + 1);
+	private int x = 20 + new Random().nextInt(816 - 20 + 1);
+	private int y1 = 12 + new Random().nextInt(718 - 12 + 1);
+	private int x1 = 21 + new Random().nextInt(842 - 22 + 1);
+	private String[] direzioni = {"sopra", "sotto", "destra", "sinistra"};
+	private int selezione = new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
 	
-
 	/**
 	 * Create the panel.
 	 */
@@ -76,14 +77,32 @@ public class Gaming extends JPanel {
 		levelLabel.setBounds(533, 743, 349, 75);
 		campoPanel.add(levelLabel);
 		
-		snake = new Snake();
-		snake.setBounds(x, y, 20, 82);
+		snake = new Snake(selezione);
+		
+		switch(selezione) {
+			case 0:
+				snake.setBounds(x, y, 20, 74);
+				break;
+				
+			case 1:
+				snake.setBounds(x, y, 20, 74);
+				break;
+			
+			case 2:
+				snake.setBounds(x, y, 74, 20);
+				break;
+				
+			case 3:
+				snake.setBounds(x, y, 74, 20);
+				break;
+		}
+		
+		
 		campoPanel.add(snake);
 		
 		rec = campoPanel.getRec();
 		
 		run();
-		x = 200;
 		spawnFood();
 		
 	}
@@ -119,17 +138,47 @@ public class Gaming extends JPanel {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					
-					y += 10;
+		/*			if(y + 10 > 683) {
+						y = 683;
+					}else {
+						y += 10;
+					}
+			
 					
-					snake.setBounds(x, y, 20, 82);
-					System.out.println(y);
+					if(y -10 < 11) {
+						y = 11;
+					}else {
+						y -= 10;
+					}
 					
-					if(snake.getBounds().intersects(rec[0])|| snake.getBounds().intersects(rec[1]) 
-						|| snake.getBounds().intersects(rec[2]) || snake.getBounds().intersects(rec[3])) { 
-						
+					
+					if(x - 10 < 20) {
+						x = 20;
+					}else {
+						x -= 10;
+				}
+					
+					if(x + 10 > 816) {
+						x = 816;
+					}else {
+						x += 10;
+					}
+			*/		
+				//	snake.setBounds(x, y, 74, 20);
+					System.out.println(selezione);
+					
+					if(y == 683 || y == 11 || x == 816 || x == 20) {
 						((Timer) e.getSource()).stop();
 					}
 					
+		/*			if(snake.getBounds().intersects(rec[0])|| snake.getBounds().intersects(rec[1]) 
+						|| snake.getBounds().intersects(rec[2]) || snake.getBounds().intersects(rec[3])) { 
+						
+						System.out.println("out");
+						
+						((Timer) e.getSource()).stop();
+					}
+			*/		
 					if(snake.getBounds().intersects(food.getBounds())) {
 						food.setBounds(-1,-1,-1,-1);
 						campoPanel.remove(food);
