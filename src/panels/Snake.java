@@ -49,7 +49,7 @@ public class Snake extends JPanel {
 		setPreferredSize(new Dimension(length * (size + 5), size)); 
 	}
 	
-
+	
 	
 
 	public void setColor(Color color) {
@@ -58,4 +58,14 @@ public class Snake extends JPanel {
             bodyPart.setColor(color);
         }
     }
+
+
+
+
+	public ArrayList<SnakeBodyLabel> getBodyParts() {
+		return bodyParts;
+	}
+	
+	
+	
 }

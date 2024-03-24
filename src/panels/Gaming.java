@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Rectangle;
+import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
@@ -38,6 +39,7 @@ public class Gaming extends JPanel {
 	private Rectangle[] rec = new Rectangle[4];
 	private FoodLabel food;
 	private JLabel scoreLabel;
+	private ArrayList<SnakeBodyLabel> body;
 	private int y = 11 + new Random().nextInt(683 - 11 + 1);
 	private int x = 20 + new Random().nextInt(816 - 20 + 1);
 	private int y1 = 11 + new Random().nextInt(683 - 11 + 1);
@@ -55,9 +57,7 @@ public class Gaming extends JPanel {
 		
 		
 		campoPanel = new CampoPanel();
-		campoPanel.setFocusable(true);	
-		campoPanel.requestFocusInWindow();
-		System.out.println(campoPanel.requestFocusInWindow() + " " + campoPanel.isFocusable());
+		
 		campoPanel.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
@@ -66,23 +66,23 @@ public class Gaming extends JPanel {
 				System.out.println(keyCode);
 				 switch (keyCode) {
 		            case KeyEvent.VK_UP:
-		                y -= 10;
 		                
+		                selezione = 0;
 		                break;
 		                
 		            case KeyEvent.VK_DOWN:
-		                y += 10;
-		                
+		               
+		                selezione = 1;
 		                break;
 		                
 		            case KeyEvent.VK_RIGHT:
-		                x += 10;
 		                
+		                selezione = 2;
 		                break;
 		                
 		            case KeyEvent.VK_LEFT:
-		                x -= 10;
 		                
+		                selezione = 3;
 		                break;
 		        }
 				
@@ -90,7 +90,7 @@ public class Gaming extends JPanel {
 		});
 		add(campoPanel, BorderLayout.CENTER);
 		setLayout(null);
-
+			
 		
 		campoPanel.setLayout(null);
 		
@@ -124,6 +124,7 @@ public class Gaming extends JPanel {
 				break;
 		}
 		
+		body = snake.getBodyParts();
 		
 		campoPanel.add(snake);
 		
@@ -133,7 +134,10 @@ public class Gaming extends JPanel {
 		spawnFood();
 		
 		System.out.println(selezione);
-		
+		campoPanel.setFocusable(true);	
+		campoPanel.setRequestFocusEnabled(true);
+		campoPanel.requestFocus();
+		System.out.println(campoPanel.requestFocusInWindow() + " " + campoPanel.isFocusable());
 	}
 	
 	private void run() {
@@ -160,109 +164,111 @@ public class Gaming extends JPanel {
 		campoPanel.add(food);
 	}
 	
+	private void respawnFood() {
+		x1 = 21 + new Random().nextInt(816 - 21 + 1);
+		y1 = 11 + new Random().nextInt(683 - 11 + 1);
+		food = new FoodLabel();
+		food.setBounds(x1, y1, 40, 33);
+		campoPanel.add(food);
+	}
+	
 	private void running(int delay) {
-		new Thread(()->{
+		new Thread(() -> {
 			new Timer(delay, new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					
-		/*			if(y + 10 > 683) {
-						y = 683;
-					}else {
-						y += 10;
-					}
-			
-					
-					if(y -10 < 11) {
-						y = 11;
-					}else {
-						y -= 10;
-					}
-					
-					
-					if(x - 10 < 20) {
-						x = 20;
-					}else {
-						x -= 10;
-				}
-					
-					if(x + 10 > 816) {
-						x = 816;
-					}else {
-						x += 10;
-					}
-					
-					snake.setBounds(x, y, 74, 20);
-					//System.out.println(selezione);
-		*/			
-					
-					switch(selezione) {
+
+					/*
+					 * if(y + 10 > 683) { y = 683; }else { y += 10; }
+					 * 
+					 * 
+					 * if(y -10 < 11) { y = 11; }else { y -= 10; }
+					 * 
+					 * 
+					 * if(x - 10 < 20) { x = 20; }else { x -= 10; }
+					 * 
+					 * if(x + 10 > 816) { x = 816; }else { x += 10; }
+					 * 
+					 * snake.setBounds(x, y, 74, 20); //System.out.println(selezione);
+					 */
+
+					switch (selezione) {
 						case 0:
-							
+	
 							up();
-							
+	
 							snake.setBounds(x, y, 20, 74);
 							break;
-						
+
 						case 1:
-							
+	
 							down();
-							
+	
 							snake.setBounds(x, y, 20, 74);
 							break;
-					
+
 						case 2:
-							
+	
 							right();
-							
+	
 							snake.setBounds(x, y, 74, 20);
 							break;
-						
+
 						case 3:
-							
+	
 							left();
-							
+	
 							snake.setBounds(x, y, 74, 20);
 							break;
-				}
+					}
 					
+					System.out.println(snake.getBounds());
 					
-					if(y == 683 || y == 11 || x == 816 || x == 20) {
+					/*
+					 * System.out.println(body.get(0).getBounds());
+					 * System.out.println(body.get(1).getBounds());
+					 * System.out.println(body.get(2).getBounds());
+					 * 
+					 */
+					
+					if (y == 683 || y == 11 || x == 816 || x == 20) {
 						go = new GameOver();
 						campoPanel.add(go, BorderLayout.CENTER);
 						campoPanel.remove(food);
 						snake.setOpaque(false);
-						snake.setColor(new Color(0,0,0,96));
-						audio("res/sounds/loseSound.wav");
+						snake.setColor(new Color(0, 0, 0, 96));
+						audio("res/sounds/GameOver.wav");
 						repaint();
 						revalidate();
 						((Timer) e.getSource()).stop();
 					}
-					
-		/*			if(snake.getBounds().intersects(rec[0])|| snake.getBounds().intersects(rec[1]) 
-						|| snake.getBounds().intersects(rec[2]) || snake.getBounds().intersects(rec[3])) { 
-						
-						System.out.println("out");
-						
-						((Timer) e.getSource()).stop();
-					}
-			*/		
-					if(snake.getBounds().intersects(food.getBounds())) {
-						food.setBounds(-1,-1,-1,-1);
+
+					/*
+					 * if(snake.getBounds().intersects(rec[0])||
+					 * snake.getBounds().intersects(rec[1]) || snake.getBounds().intersects(rec[2])
+					 * || snake.getBounds().intersects(rec[3])) {
+					 * 
+					 * System.out.println("out");
+					 * 
+					 * ((Timer) e.getSource()).stop(); }
+					 */
+					if (snake.getBounds().intersects(food.getBounds())) {
 						campoPanel.remove(food);
+						respawnFood();
 						score++;
 						scoreLabel.setText("Score: " + score);
 						y1 = 12 + new Random().nextInt(747 - 12 + 1);
 						x1 = 21 + new Random().nextInt(879 - 21 + 1);
-						spawnFood();
+						repaint();
+						revalidate();
 					}
-					
-					
+
 				}
-				
+
 			}).start();
-		}).start();;
+		}).start();
+		;
 	}
 	
 	

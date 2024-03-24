@@ -59,5 +59,6 @@ public class Main {
 		
 		MenuPanel menuPanel = new MenuPanel();
 		campoPanel.add(menuPanel, BorderLayout.CENTER);
+		
 	}
 }
