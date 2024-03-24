@@ -40,8 +40,8 @@ public class Gaming extends JPanel {
 	private JLabel scoreLabel;
 	private int y = 11 + new Random().nextInt(683 - 11 + 1);
 	private int x = 20 + new Random().nextInt(816 - 20 + 1);
-	private int y1 = 12 + new Random().nextInt(718 - 12 + 1);
-	private int x1 = 21 + new Random().nextInt(842 - 22 + 1);
+	private int y1 = 11 + new Random().nextInt(683 - 11 + 1);
+	private int x1 = 21 + new Random().nextInt(816 - 21 + 1);
 	private int selezione = new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
 	
 	/**
@@ -49,7 +49,6 @@ public class Gaming extends JPanel {
 	 */
 	public Gaming(String level) {
 		setSize(920,850);
-		setLayout(new BorderLayout(0, 0));
 		
 		this.level = level;
 		
@@ -90,6 +89,7 @@ public class Gaming extends JPanel {
 			}
 		});
 		add(campoPanel, BorderLayout.CENTER);
+		setLayout(null);
 
 		
 		campoPanel.setLayout(null);
@@ -132,7 +132,7 @@ public class Gaming extends JPanel {
 		run();
 		spawnFood();
 		
-	
+		System.out.println(selezione);
 		
 	}
 	
@@ -197,6 +197,36 @@ public class Gaming extends JPanel {
 					//System.out.println(selezione);
 		*/			
 					
+					switch(selezione) {
+						case 0:
+							
+							up();
+							
+							snake.setBounds(x, y, 20, 74);
+							break;
+						
+						case 1:
+							
+							down();
+							
+							snake.setBounds(x, y, 20, 74);
+							break;
+					
+						case 2:
+							
+							right();
+							
+							snake.setBounds(x, y, 74, 20);
+							break;
+						
+						case 3:
+							
+							left();
+							
+							snake.setBounds(x, y, 74, 20);
+							break;
+				}
+					
 					
 					if(y == 683 || y == 11 || x == 816 || x == 20) {
 						go = new GameOver();
@@ -248,6 +278,39 @@ public class Gaming extends JPanel {
 			}
 		}).start();
 
+	}
+	
+	private void up() {
+		if(y -10 < 11) {
+			y = 11;
+		}else {
+			y -= 10;
+		}
+		
+	}
+	
+	private void down() {
+		if(y + 10 > 683) {
+			y = 683;
+		}else {
+			y += 10;
+		}
+	}
+	
+	private void left() {
+		if(x - 10 < 20) {
+			x = 20;
+		}else {
+			x -= 10;
+		}
+	}
+	
+	private void right() {
+		if(x + 10 > 816) {
+			x = 816;
+		}else {
+			x += 10;
+		}
 	}
 	
 }
