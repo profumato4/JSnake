@@ -28,7 +28,7 @@ import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
 
-public class Gaming extends JPanel {
+public class Gaming extends JPanel implements Move{
 
 	private static final long serialVersionUID = 1L;
 	private CampoPanel campoPanel;
@@ -40,6 +40,8 @@ public class Gaming extends JPanel {
 	private FoodLabel food;
 	private JLabel scoreLabel;
 	private ArrayList<SnakeBodyLabel> body;
+	private ArrayList<Integer> snakeX = new ArrayList<>();
+	private ArrayList<Integer> snakeY = new ArrayList<>();
 	private int y = 11 + new Random().nextInt(683 - 11 + 1);
 	private int x = 20 + new Random().nextInt(816 - 20 + 1);
 	private int y1 = 11 + new Random().nextInt(683 - 11 + 1);
@@ -91,7 +93,6 @@ public class Gaming extends JPanel {
 		add(campoPanel, BorderLayout.CENTER);
 		setLayout(null);
 			
-		
 		campoPanel.setLayout(null);
 		
 		scoreLabel = new JLabel("Score: " + score);
@@ -125,6 +126,8 @@ public class Gaming extends JPanel {
 		}
 		
 		body = snake.getBodyParts();
+		
+		setCordinates();
 		
 		campoPanel.add(snake);
 		
@@ -211,7 +214,9 @@ public class Gaming extends JPanel {
 						case 2:
 	
 							right();
-	
+							
+							
+							
 							snake.setBounds(x, y, 74, 20);
 							break;
 
@@ -293,6 +298,8 @@ public class Gaming extends JPanel {
 			y -= 10;
 		}
 		
+		moveUp();
+		
 	}
 	
 	private void down() {
@@ -301,6 +308,9 @@ public class Gaming extends JPanel {
 		}else {
 			y += 10;
 		}
+		
+		moveDown();
+		
 	}
 	
 	private void left() {
@@ -309,6 +319,9 @@ public class Gaming extends JPanel {
 		}else {
 			x -= 10;
 		}
+		
+		moveLeft();
+		
 	}
 	
 	private void right() {
@@ -317,6 +330,88 @@ public class Gaming extends JPanel {
 		}else {
 			x += 10;
 		}
+		
+		moveRight();
+		
 	}
+	
+	
+	@Override
+	public void moveLeft() {
+		for (int r = body.size() - 2; r > 0; r--) {
+			System.out.println(r);
+			snakeY.set(r + 1, snakeY.get(r));
+		}
+
+		for (int r = body.size() - 1; r >= 0; r--) {
+			if (r == 0) {
+				snakeX.set(r, snakeX.get(r) + 10);
+			} else {
+				snakeX.set(r, snakeX.get(r - 1));
+			}
+		}
+		
+	}
+
+	@Override
+	public void moveUp() {
+		for (int r = body.size() - 2; r > 0; r--) {
+			snakeX.set(r + 1, snakeX.get(r));
+		}
+
+		for (int r = body.size() - 1; r >= 0; r--) {
+			if (r == 0) {
+				snakeY.set(r, snakeY.get(r) + 10);
+			} else {
+				snakeY.set(r, snakeY.get(r - 1));
+			}
+		}
+		
+	}
+
+	@Override
+	public void moveDown() {
+		for (int r = body.size() - 2; r > 0; r--) {
+			snakeX.set(r + 1, snakeX.get(r));
+		}
+
+		for (int r = body.size() - 1; r >= 0; r--) {
+			if (r == 0) {
+				snakeY.set(r, snakeY.get(r) + 10);
+			} else {
+				snakeY.set(r, snakeY.get(r - 1));
+			}
+		}
+		
+	}
+	
+	
+
+	@Override
+	public void moveRight() {
+		for (int r = body.size() - 2; r > 0; r--) {
+			snakeY.set(r + 1, snakeY.get(r));
+		}
+
+		for (int r = body.size() - 1; r >= 0; r--) {
+			if (r == 0) {
+				snakeX.set(r, snakeX.get(r) + 10);
+			} else {
+				snakeX.set(r, snakeX.get(r - 1));
+			}
+		}
+	}
+
+	
+	private void setCordinates() {
+		snakeX.add(body.get(2).getX());
+		snakeX.add(body.get(1).getX());
+		snakeX.add(body.get(0).getX());
+		
+		snakeY.add(body.get(2).getY());
+		snakeY.add(body.get(1).getY());
+		snakeY.add(body.get(0).getY());
+	}
+	
 	
 }
