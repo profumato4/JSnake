@@ -19,6 +19,9 @@ public class CampoPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public CampoPanel() {
+		
+		setFocusable(false);
+		
 		setBackground(new Color(46, 139, 87));
 		setLayout(null);
 		setSize(920,850);

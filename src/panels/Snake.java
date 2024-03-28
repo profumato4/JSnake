@@ -23,6 +23,9 @@ public class Snake extends JPanel {
 	 * Create the panel.
 	 */
 	public Snake(int n) {
+		
+		setFocusable(false);
+		
 		bodyParts = new ArrayList<>();
 		this.n = n;
 		setLayout(null);

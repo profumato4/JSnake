@@ -46,12 +46,16 @@ public class Main {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+
+	//	frame.setUndecorated(true);
 		
 		
 		frame.setBounds(600, 100, 920, 850);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setResizable(false);
 		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		frame.setFocusable(false);
 		
 		CampoPanel campoPanel = new CampoPanel();
 		frame.getContentPane().add(campoPanel, BorderLayout.CENTER);

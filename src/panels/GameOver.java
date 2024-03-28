@@ -18,6 +18,8 @@ public class GameOver extends JPanel {
 
 		setUp();
 		
+		setFocusable(false);
+		
 	}
 	
 	private void setUp() {

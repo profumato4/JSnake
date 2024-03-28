@@ -26,6 +26,7 @@ public class StartGameAnimation extends JPanel implements Animation{
 	public StartGameAnimation() {
 		setSize(892,764);
 		setLayout(null);
+		setFocusable(false);
 
 	}
 
@@ -85,6 +86,11 @@ public class StartGameAnimation extends JPanel implements Animation{
 	
 	private void startGame(String level) {
 		game = new Gaming(level);
+		game.getCampoPanel().setFocusable(true);
+	//	game.getCampoPanel().grabFocus();
+		game.getCampoPanel().requestFocusInWindow();
+		game.getCampoPanel().repaint();
+		game.getCampoPanel().revalidate();
 		add(game, BorderLayout.CENTER);
 	}
 

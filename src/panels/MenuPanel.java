@@ -39,6 +39,9 @@ public class MenuPanel extends JPanel {
 	 * Create the panel.
 	 */
 	public MenuPanel() {
+		
+		setFocusable(false);
+		
 		snakeFont = new SnakeFont(90);
 		font = snakeFont.getFont();
 		setSize(920, 850);

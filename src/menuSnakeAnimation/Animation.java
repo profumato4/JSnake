@@ -19,6 +19,7 @@ public interface Animation{
 		panel.setBackground(new Color(46, 139, 87));
 		panel.setSize(222, 226);
 		panel.setLayout(null);
+		panel.setFocusable(false);
 	}
 	
 	void startAnimation();

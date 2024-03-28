@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 import javax.swing.Timer;
 
 import labels.SnakeBodyLabel;
@@ -17,6 +18,9 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
 import javax.swing.JLabel;
 
 import labels.FoodLabel;
@@ -27,6 +31,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.IOException;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class Gaming extends JPanel implements Move{
 
@@ -46,7 +52,7 @@ public class Gaming extends JPanel implements Move{
 	private int x = 20 + new Random().nextInt(816 - 20 + 1);
 	private int y1 = 11 + new Random().nextInt(683 - 11 + 1);
 	private int x1 = 21 + new Random().nextInt(816 - 21 + 1);
-	private int selezione = new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
+	private byte selezione = (byte) new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
 	
 	/**
 	 * Create the panel.
@@ -56,40 +62,36 @@ public class Gaming extends JPanel implements Move{
 		
 		this.level = level;
 		
+		setFocusable(false);
+		
+		campoPanel = new CampoPanel();		
+		
+		/*
+		 * campoPanel.addKeyListener(new KeyAdapter() {
+		 * 
+		 * @Override public void keyPressed(KeyEvent e) {
+		 * 
+		 * int keyCode = e.getKeyCode(); System.out.println(keyCode); switch (keyCode) {
+		 * case KeyEvent.VK_UP:
+		 * 
+		 * selezione = 0; break;
+		 * 
+		 * case KeyEvent.VK_DOWN:
+		 * 
+		 * selezione = 1; break;
+		 * 
+		 * case KeyEvent.VK_RIGHT:
+		 * 
+		 * selezione = 2; break;
+		 * 
+		 * case KeyEvent.VK_LEFT:
+		 * 
+		 * selezione = 3; break; }
+		 * 
+		 * } });
+		 */
 		
 		
-		campoPanel = new CampoPanel();
-		
-		campoPanel.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				
-				int keyCode = e.getKeyCode();
-				System.out.println(keyCode);
-				 switch (keyCode) {
-		            case KeyEvent.VK_UP:
-		                
-		                selezione = 0;
-		                break;
-		                
-		            case KeyEvent.VK_DOWN:
-		               
-		                selezione = 1;
-		                break;
-		                
-		            case KeyEvent.VK_RIGHT:
-		                
-		                selezione = 2;
-		                break;
-		                
-		            case KeyEvent.VK_LEFT:
-		                
-		                selezione = 3;
-		                break;
-		        }
-				
-			}
-		});
 		add(campoPanel, BorderLayout.CENTER);
 		setLayout(null);
 			
@@ -136,11 +138,17 @@ public class Gaming extends JPanel implements Move{
 		run();
 		spawnFood();
 		
+		setupKeyBindings();
+		
 		System.out.println(selezione);
-		campoPanel.setFocusable(true);	
-		campoPanel.setRequestFocusEnabled(true);
-		campoPanel.requestFocus();
-		System.out.println(campoPanel.requestFocusInWindow() + " " + campoPanel.isFocusable());
+    //	campoPanel.setFocusable(true);
+	//	campoPanel.setRequestFocusEnabled(true);
+	//	campoPanel.grabFocus();
+	//	campoPanel.requestFocus();
+	//	campoPanel.requestFocusInWindow();
+	//	campoPanel.repaint();
+	//	campoPanel.revalidate();
+	//	System.out.println(campoPanel.requestFocusInWindow() + " " + campoPanel.isFocusable());
 	}
 	
 	private void run() {
@@ -413,5 +421,66 @@ public class Gaming extends JPanel implements Move{
 		snakeY.add(body.get(0).getY());
 	}
 	
+	public CampoPanel getCampoPanel() {
+		return campoPanel;
+	}
+	
+	private void setupKeyBindings() {
+        InputMap inputMap = campoPanel.getInputMap(JPanel.WHEN_IN_FOCUSED_WINDOW);
+        ActionMap actionMap = campoPanel.getActionMap();
+
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0), "up");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
+
+        actionMap.put("up", new AbstractAction() {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void actionPerformed(ActionEvent e) {
+                selezione = 0;
+            }
+        });
+
+        actionMap.put("down", new AbstractAction() {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void actionPerformed(ActionEvent e) {
+                selezione = 1;
+            }
+        });
+
+        actionMap.put("right", new AbstractAction() {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void actionPerformed(ActionEvent e) {
+                selezione = 2;
+            }
+        });
+
+        actionMap.put("left", new AbstractAction() {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void actionPerformed(ActionEvent e) {
+                selezione = 3;
+            }
+        });
+    }
 	
 }
