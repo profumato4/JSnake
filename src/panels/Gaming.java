@@ -53,6 +53,9 @@ public class Gaming extends JPanel implements Move{
 	private int y1 = 11 + new Random().nextInt(683 - 11 + 1);
 	private int x1 = 21 + new Random().nextInt(816 - 21 + 1);
 	private byte selezione = (byte) new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
+	private int w = 0;
+	private int h = 0;
+	
 	
 	/**
 	 * Create the panel.
@@ -111,19 +114,35 @@ public class Gaming extends JPanel implements Move{
 		
 		switch(selezione) {
 			case 0:
-				snake.setBounds(x, y, 20, 74);
+				
+				w = 20;
+				h = 74;
+				
+				snake.setBounds(x, y, w, h);
 				break;
 				
 			case 1:
-				snake.setBounds(x, y, 20, 74);
+				
+				w = 20;
+				h = 74;
+				
+				snake.setBounds(x, y, w, h);
 				break;
 			
 			case 2:
-				snake.setBounds(x, y, 74, 20);
+				
+				w = 74;
+				h = 20;
+				
+				snake.setBounds(x, y, w, h);
 				break;
 				
 			case 3:
-				snake.setBounds(x, y, 74, 20);
+				
+				w = 74;
+				h = 20;
+				
+				snake.setBounds(x, y, w, h);
 				break;
 		}
 		
@@ -140,7 +159,7 @@ public class Gaming extends JPanel implements Move{
 		
 		setupKeyBindings();
 		
-		System.out.println(selezione);
+	//	System.out.println(selezione);
     //	campoPanel.setFocusable(true);
 	//	campoPanel.setRequestFocusEnabled(true);
 	//	campoPanel.grabFocus();
@@ -208,35 +227,50 @@ public class Gaming extends JPanel implements Move{
 						case 0:
 	
 							up();
-	
-							snake.setBounds(x, y, 20, 74);
+							
+							w = 20;
+							h = 74;
+							
+							setBodySize();
+							snake.setBounds(x, y, w, h);
 							break;
 
 						case 1:
 	
 							down();
 	
-							snake.setBounds(x, y, 20, 74);
+							w = 20;
+							h = 74;
+							
+							setBodySize();
+							snake.setBounds(x, y, w, h);
 							break;
 
 						case 2:
 	
 							right();
 							
+							w = 74;
+							h = 20;
 							
-							
-							snake.setBounds(x, y, 74, 20);
+							setBodySize();
+							snake.setBounds(x, y, w, h);
 							break;
 
 						case 3:
 	
 							left();
 	
-							snake.setBounds(x, y, 74, 20);
+							w = 74;
+							h = 20;
+							
+							setBodySize();
+							snake.setBounds(x, y, w, h);
 							break;
 					}
 					
-					System.out.println(snake.getBounds());
+					System.out.println("body " + body.get(0).getSize());
+					System.out.println("snake" + snake.getSize());
 					
 					/*
 					 * System.out.println(body.get(0).getBounds());
@@ -347,7 +381,7 @@ public class Gaming extends JPanel implements Move{
 	@Override
 	public void moveLeft() {
 		for (int r = body.size() - 2; r > 0; r--) {
-			System.out.println(r);
+	//		System.out.println(r);
 			snakeY.set(r + 1, snakeY.get(r));
 		}
 
@@ -442,7 +476,14 @@ public class Gaming extends JPanel implements Move{
 
 			@Override
             public void actionPerformed(ActionEvent e) {
-                selezione = 0;
+				
+				if(selezione == 1) {
+					selezione = 1;
+				}else {
+					selezione = 0;
+				}
+				
+         //       selezione = 0;
             }
         });
 
@@ -454,7 +495,14 @@ public class Gaming extends JPanel implements Move{
 
 			@Override
             public void actionPerformed(ActionEvent e) {
-                selezione = 1;
+				
+				if(selezione == 0) {
+					selezione = 0;
+				}else {
+					selezione = 1;
+				}
+				
+            //    selezione = 1;
             }
         });
 
@@ -466,7 +514,14 @@ public class Gaming extends JPanel implements Move{
 
 			@Override
             public void actionPerformed(ActionEvent e) {
-                selezione = 2;
+				
+				if(selezione == 3) {
+					selezione = 3;
+				}else {
+					selezione = 2;
+				}
+				
+               // selezione = 2;
             }
         });
 
@@ -478,9 +533,33 @@ public class Gaming extends JPanel implements Move{
 
 			@Override
             public void actionPerformed(ActionEvent e) {
-                selezione = 3;
+				
+				if(selezione == 2) {
+					selezione = 2;
+				}else {
+					selezione = 3;
+				}
+				
+           //     selezione = 3;
             }
         });
     }
+	
+	private void setBodySize() {
+/*		int x1 = x;
+		int y1 = x;
+		for(SnakeBodyLabel b : body) {
+		//	b.paintImmediately(x, y, w, h);
+			b.repaint(x1, y1, w, h);
+			b.setSize(w, h);
+			b.repaint();
+			b.revalidate();
+			x1 += 10;
+			y1 += 10;
+		}
+	//	snake.repaint();
+	//	snake.revalidate();
+	//	snake.repaint(x, y, w, h);
+*/	}
 	
 }
