@@ -55,7 +55,9 @@ public class Gaming extends JPanel implements Move{
 	private byte selezione = (byte) new Random().nextInt(4);  // 0. sopra 1. sotto 2. destra 3. sinistra
 	private int w = 0;
 	private int h = 0;
-	
+	private Timer timer;
+	private PausePanel pausePanel;
+	private byte temp = 0; 
 	
 	/**
 	 * Create the panel.
@@ -204,7 +206,7 @@ public class Gaming extends JPanel implements Move{
 	
 	private void running(int delay) {
 		new Thread(() -> {
-			new Timer(delay, new ActionListener() {
+			timer = new Timer(delay, new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -269,8 +271,8 @@ public class Gaming extends JPanel implements Move{
 							break;
 					}
 					
-					System.out.println("body " + body.get(0).getSize());
-					System.out.println("snake" + snake.getSize());
+	//				System.out.println("body " + body.get(0).getSize());
+	//				System.out.println("snake" + snake.getSize());
 					
 					/*
 					 * System.out.println(body.get(0).getBounds());
@@ -313,9 +315,10 @@ public class Gaming extends JPanel implements Move{
 
 				}
 
-			}).start();
+			});
+			timer.start();
 		}).start();
-		;
+		
 	}
 	
 	
@@ -467,6 +470,7 @@ public class Gaming extends JPanel implements Move{
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN, 0), "down");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT, 0), "right");
         inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT, 0), "left");
+        inputMap.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "esc");
 
         actionMap.put("up", new AbstractAction() {
             /**
@@ -543,6 +547,39 @@ public class Gaming extends JPanel implements Move{
            //     selezione = 3;
             }
         });
+        
+        actionMap.put("esc", new AbstractAction() {
+            /**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
+			@Override
+            public void actionPerformed(ActionEvent e) {
+				if (timer != null && timer.isRunning() && temp == 0) {
+		            timer.stop();
+		            pausePanel = new PausePanel(timer, new ResumeButtonListener() {
+
+						@Override
+						public void onResumeClicked(byte value) {
+							temp = (byte) value;
+						}
+		            	
+		            });
+					campoPanel.add(pausePanel, BorderLayout.CENTER);
+					campoPanel.repaint();
+					campoPanel.revalidate();
+					temp = 1;
+		        }else {
+		        	temp = 0;
+		        	pausePanel.getResumeButton().doClick();
+		        }
+				System.out.println(temp);
+            }
+        });
+        
+
+        
     }
 	
 	private void setBodySize() {
