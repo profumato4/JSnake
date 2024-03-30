@@ -67,7 +67,9 @@ public class PausePanel extends JPanel {
 		restart.setOpaque(false);
 		restart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				game.setVisible(false);
+				menu.getStartGameAnimation().setVisible(true);
+				menu.getStartGameAnimation().startAnimation(game.getLevel());
 			}
 		});
 		restart.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 200));

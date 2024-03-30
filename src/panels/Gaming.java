@@ -585,6 +585,10 @@ public class Gaming extends JPanel implements Move{
         
     }
 	
+	public String getLevel() {
+		return level;
+	}
+	
 	private void setBodySize() {
 /*		int x1 = x;
 		int y1 = x;

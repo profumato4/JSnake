@@ -195,4 +195,8 @@ public class MenuPanel extends JPanel {
 		return campoPanel;
 	}
 	
+	public StartGameAnimation getStartGameAnimation() {
+		return sga;
+	}
+	
 }
