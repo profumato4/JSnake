@@ -180,7 +180,7 @@ public class MenuPanel extends JPanel {
 		hardAnimation.setVisible(false);
 		campoPanel.add(hardAnimation);
 		
-		sga = new StartGameAnimation();
+		sga = new StartGameAnimation(this);
 		sga.setVisible(false);
 		add(sga, BorderLayout.CENTER);
 		
@@ -190,4 +190,9 @@ public class MenuPanel extends JPanel {
 		campoPanel.add(ca);
 		
 	}
+	
+	public CampoPanel getCampoPanel() {
+		return campoPanel;
+	}
+	
 }

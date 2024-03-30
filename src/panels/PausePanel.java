@@ -17,7 +17,7 @@ public class PausePanel extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PausePanel(Timer t, ResumeButtonListener listener) {
+	public PausePanel(Timer t, ResumeButtonListener listener, MenuPanel menu, Gaming game) {
 		setSize(920, 850);
 		setOpaque(false);
 		setLayout(null);
@@ -47,7 +47,12 @@ public class PausePanel extends JPanel {
 		home.setOpaque(false);
 		home.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				game.setVisible(false);
+				menu.getCampoPanel().setVisible(true);
+				menu.setVisible(true);
+				menu.getParent().repaint();
+				menu.getParent().revalidate();
+				setVisible(false);
 			}
 		});
 		home.setFont(new Font("Tempus Sans ITC", Font.PLAIN, 130));

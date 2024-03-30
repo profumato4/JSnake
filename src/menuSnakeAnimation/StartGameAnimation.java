@@ -7,6 +7,7 @@ import javax.swing.Timer;
 import java.awt.BorderLayout;
 import panels.CampoPanel;
 import panels.Gaming;
+import panels.MenuPanel;
 
 import javax.swing.JLabel;
 import java.awt.Font;
@@ -19,15 +20,18 @@ public class StartGameAnimation extends JPanel implements Animation{
 	private Timer t;
 	private Gaming game;
 	private String level;
+	private MenuPanel menu;
 	
 	/**
 	 * Create the panel.
 	 */
-	public StartGameAnimation() {
+	public StartGameAnimation(MenuPanel menu) {
 		setSize(892,764);
 		setLayout(null);
 		setFocusable(false);
-
+		
+		this.menu = menu;
+		
 	}
 
 	
@@ -85,7 +89,7 @@ public class StartGameAnimation extends JPanel implements Animation{
 	}
 	
 	private void startGame(String level) {
-		game = new Gaming(level);
+		game = new Gaming(level, menu);
 		game.getCampoPanel().setFocusable(true);
 	//	game.getCampoPanel().grabFocus();
 		game.getCampoPanel().requestFocusInWindow();

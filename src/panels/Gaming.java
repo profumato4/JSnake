@@ -58,14 +58,17 @@ public class Gaming extends JPanel implements Move{
 	private Timer timer;
 	private PausePanel pausePanel;
 	private byte temp = 0; 
+	private MenuPanel menu;
+	private Gaming game = this;
 	
 	/**
 	 * Create the panel.
 	 */
-	public Gaming(String level) {
+	public Gaming(String level, MenuPanel menu) {
 		setSize(920,850);
 		
 		this.level = level;
+		this.menu = menu;
 		
 		setFocusable(false);
 		
@@ -565,7 +568,7 @@ public class Gaming extends JPanel implements Move{
 							temp = (byte) value;
 						}
 		            	
-		            });
+		            }, menu, game);
 					campoPanel.add(pausePanel, BorderLayout.CENTER);
 					campoPanel.repaint();
 					campoPanel.revalidate();
