@@ -285,7 +285,7 @@ public class Gaming extends JPanel implements Move{
 					 */
 					
 					if (y == 683 || y == 11 || x == 816 || x == 20) {
-						go = new GameOver();
+						go = new GameOver(game, menu);
 						campoPanel.add(go, BorderLayout.CENTER);
 						campoPanel.remove(food);
 						snake.setOpaque(false);
@@ -573,7 +573,7 @@ public class Gaming extends JPanel implements Move{
 					campoPanel.repaint();
 					campoPanel.revalidate();
 					temp = 1;
-		        }else {
+		        }else if (timer != null && !timer.isRunning() && temp == 1){
 		        	temp = 0;
 		        	pausePanel.getResumeButton().doClick();
 		        }
