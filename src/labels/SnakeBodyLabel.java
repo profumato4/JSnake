@@ -17,11 +17,12 @@ public class SnakeBodyLabel extends JLabel  {
 	private int size = 20;
 	
 	public SnakeBodyLabel() {
-		setPreferredSize(new Dimension(40, 40));
+		setPreferredSize(new Dimension(size, size));
 	}
 	
 	public SnakeBodyLabel(int size) {
 		this.size = size;
+		setPreferredSize(new Dimension(size, size));
 	}
 	
 	@Override

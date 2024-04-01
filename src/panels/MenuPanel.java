@@ -184,7 +184,7 @@ public class MenuPanel extends JPanel {
 		sga.setVisible(false);
 		add(sga, BorderLayout.CENTER);
 		
-		ca = new ColorAnimation();
+		ca = new ColorAnimation(this);
 		ca.setBounds(831, 692, 40, 40);
 		ca.startAnimation();
 		campoPanel.add(ca);

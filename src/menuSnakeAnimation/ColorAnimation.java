@@ -1,16 +1,19 @@
 package menuSnakeAnimation;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 
 import labels.SnakeBodyLabel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import panels.ColorsPanel;
+import panels.MenuPanel;
 
 public class ColorAnimation extends JPanel implements Animation{
 
@@ -18,16 +21,24 @@ public class ColorAnimation extends JPanel implements Animation{
 	private Timer t;
 	private int i = 0;
 	private Color [] colors = {Color.black, Color.blue, Color.cyan, Color.darkGray, Color.green, Color.lightGray, Color.magenta,
-								Color.orange,Color.pink, Color.red, Color.white, Color.yellow};
+								Color.orange,Color.pink, Color.red, Color.white, Color.yellow, Color.decode("#FF1493"), Color.decode("#8A2BE2"),
+								Color.decode("#008080"),Color.decode("#800000"),Color.decode("#FF4500"),Color.decode("#808000")};
+	private ColorsPanel colorsPanel;
 
 	/**
 	 * Create the panel.
 	 */
-	public ColorAnimation() {
+	public ColorAnimation(MenuPanel menu) {
+		colorsPanel = new ColorsPanel();
+		colorsPanel.setVisible(false);
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				System.out.println("clicked frocio");
+				colorsPanel.setVisible(true);
+				menu.removeAll();
+				menu.add(colorsPanel, BorderLayout.CENTER);
+				menu.repaint();
+				menu.revalidate();
 			}
 		});
 		setSize(40,40);
