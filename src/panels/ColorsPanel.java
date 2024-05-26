@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -12,13 +14,13 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import labels.SnakeBodyLabel;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import menuSnakeAnimation.ColorsAnimation;
 
 public class ColorsPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private MenuPanel menu;
+	private ColorsAnimation ca = new ColorsAnimation();;
 
 	/**
 	 * Create the panel.
@@ -31,6 +33,8 @@ public class ColorsPanel extends JPanel {
 		setOpaqueFalseForAllPanels(this);
 		setFontForAllLabels(this, new Font("Tempus Sans ITC", Font.BOLD, 60));
 		setColorForAllLabels(this, Color.black);
+		
+		
 		
 		JLabel lblNewLabel = new JLabel();
 		lblNewLabel.addMouseListener(new MouseAdapter() {
@@ -161,6 +165,8 @@ public class ColorsPanel extends JPanel {
 		snakeBodyLabel_1_1.setBounds(132, 0, 40, 40);
 		panel.add(snakeBodyLabel_1_1);
 		
+		ca.moveSnake(panel);
+		
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBounds(79, 171, 172, 40);
@@ -213,7 +219,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setLayout(null);
-		panel_1_1.setBounds(79, 342, 172, 40);
+		panel_1_1.setBounds(79, 328, 172, 40);
 		add(panel_1_1);
 		
 		SnakeBodyLabel snakeBodyLabel_3_2 = new SnakeBodyLabel(40);
@@ -238,7 +244,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_3 = new JPanel();
 		panel_3.setLayout(null);
-		panel_3.setBounds(79, 424, 172, 40);
+		panel_3.setBounds(79, 412, 172, 40);
 		add(panel_3);
 		
 		SnakeBodyLabel snakeBodyLabel_5 = new SnakeBodyLabel(40);
@@ -263,7 +269,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_1_2 = new JPanel();
 		panel_1_2.setLayout(null);
-		panel_1_2.setBounds(79, 515, 172, 40);
+		panel_1_2.setBounds(79, 503, 172, 40);
 		add(panel_1_2);
 		
 		SnakeBodyLabel snakeBodyLabel_3_3 = new SnakeBodyLabel(40);
@@ -288,7 +294,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_2_1 = new JPanel();
 		panel_2_1.setLayout(null);
-		panel_2_1.setBounds(79, 595, 172, 40);
+		panel_2_1.setBounds(79, 583, 172, 40);
 		add(panel_2_1);
 		
 		SnakeBodyLabel snakeBodyLabel_4_2 = new SnakeBodyLabel(40);
@@ -313,7 +319,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_1_1_1 = new JPanel();
 		panel_1_1_1.setLayout(null);
-		panel_1_1_1.setBounds(79, 686, 172, 40);
+		panel_1_1_1.setBounds(79, 664, 172, 40);
 		add(panel_1_1_1);
 		
 		SnakeBodyLabel snakeBodyLabel_3_2_1 = new SnakeBodyLabel(40);
@@ -338,7 +344,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_2_1_1 = new JPanel();
 		panel_2_1_1.setLayout(null);
-		panel_2_1_1.setBounds(79, 754, 172, 40);
+		panel_2_1_1.setBounds(79, 749, 172, 40);
 		add(panel_2_1_1);
 		
 		SnakeBodyLabel snakeBodyLabel_4_2_1 = new SnakeBodyLabel(40);
@@ -438,7 +444,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_2_2 = new JPanel();
 		panel_2_2.setLayout(null);
-		panel_2_2.setBounds(615, 339, 172, 40);
+		panel_2_2.setBounds(615, 328, 172, 40);
 		add(panel_2_2);
 		
 		SnakeBodyLabel snakeBodyLabel_4_1 = new SnakeBodyLabel(40);
@@ -463,7 +469,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_1_1_2 = new JPanel();
 		panel_1_1_2.setLayout(null);
-		panel_1_1_2.setBounds(615, 430, 172, 40);
+		panel_1_1_2.setBounds(615, 412, 172, 40);
 		add(panel_1_1_2);
 		
 		SnakeBodyLabel snakeBodyLabel_3_2_2 = new SnakeBodyLabel(40);
@@ -488,7 +494,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_3_1 = new JPanel();
 		panel_3_1.setLayout(null);
-		panel_3_1.setBounds(615, 512, 172, 40);
+		panel_3_1.setBounds(615, 496, 172, 40);
 		add(panel_3_1);
 		
 		SnakeBodyLabel snakeBodyLabel_5_1 = new SnakeBodyLabel(40);
@@ -513,7 +519,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_1_2_1 = new JPanel();
 		panel_1_2_1.setLayout(null);
-		panel_1_2_1.setBounds(615, 603, 172, 40);
+		panel_1_2_1.setBounds(615, 587, 172, 40);
 		add(panel_1_2_1);
 		
 		SnakeBodyLabel snakeBodyLabel_3_3_1 = new SnakeBodyLabel(40);
@@ -538,7 +544,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_2_1_2 = new JPanel();
 		panel_2_1_2.setLayout(null);
-		panel_2_1_2.setBounds(615, 683, 172, 40);
+		panel_2_1_2.setBounds(615, 674, 172, 40);
 		add(panel_2_1_2);
 		
 		SnakeBodyLabel snakeBodyLabel_4_2_2 = new SnakeBodyLabel(40);
@@ -563,7 +569,7 @@ public class ColorsPanel extends JPanel {
 		
 		JPanel panel_1_1_1_2 = new JPanel();
 		panel_1_1_1_2.setLayout(null);
-		panel_1_1_1_2.setBounds(615, 765, 172, 40);
+		panel_1_1_1_2.setBounds(615, 759, 172, 40);
 		add(panel_1_1_1_2);
 		
 		SnakeBodyLabel snakeBodyLabel_3_2_1_2 = new SnakeBodyLabel(40);

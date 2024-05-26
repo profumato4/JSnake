@@ -29,11 +29,11 @@ public class ColorAnimation extends JPanel implements Animation{
 	 * Create the panel.
 	 */
 	public ColorAnimation(MenuPanel menu) {
-		colorsPanel = new ColorsPanel();
-		colorsPanel.setVisible(false);
+		
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+				colorsPanel = new ColorsPanel();
 				colorsPanel.setVisible(true);
 				menu.removeAll();
 				menu.add(colorsPanel, BorderLayout.CENTER);

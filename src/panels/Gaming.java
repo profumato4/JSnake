@@ -347,7 +347,7 @@ public class Gaming extends JPanel implements Move{
 		}
 		
 		moveUp();
-		
+		updateBodyCoordinates();
 	}
 	
 	private void down() {
@@ -358,7 +358,7 @@ public class Gaming extends JPanel implements Move{
 		}
 		
 		moveDown();
-		
+		updateBodyCoordinates();
 	}
 	
 	private void left() {
@@ -369,7 +369,7 @@ public class Gaming extends JPanel implements Move{
 		}
 		
 		moveLeft();
-		
+		updateBodyCoordinates();
 	}
 	
 	private void right() {
@@ -380,7 +380,7 @@ public class Gaming extends JPanel implements Move{
 		}
 		
 		moveRight();
-		
+		updateBodyCoordinates();
 	}
 	
 	
@@ -450,7 +450,18 @@ public class Gaming extends JPanel implements Move{
 		}
 	}
 
-	
+
+	private void updateBodyCoordinates() {
+/*		for (int i = body.size() - 1; i > 0; i--) {
+			SnakeBodyLabel currentPart = body.get(i);
+			SnakeBodyLabel previousPart = body.get(i - 1);
+			currentPart.setLocation(previousPart.getLocation());
+		}
+		body.get(0).setLocation(x, y);
+		snake.repaint();
+		snake.revalidate();
+*/	}
+
 	private void setCordinates() {
 		snakeX.add(body.get(2).getX());
 		snakeX.add(body.get(1).getX());
